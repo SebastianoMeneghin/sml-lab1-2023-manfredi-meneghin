@@ -31,8 +31,8 @@ print(f'\n{iris_df["variety"].value_counts()}')
 # summarize its main characteristics, identify patterns, and uncover insights.
 
 # We look at the distribution and range of values for the 4 different features, comparing them
-'''g = sns.pairplot(iris_df, hue='variety', markers='+')
-plt.show()'''
+g = sns.pairplot(iris_df, hue='variety', markers='+')
+plt.show()
 
 # We can now visualize the range of values for the length and width of the sepal and petal for each of the 3 flowers,
 # with their quartiles indicated
