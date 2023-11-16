@@ -19,7 +19,7 @@ print("Model downloaded")
 
 def iris(sepal_length, sepal_width, petal_length, petal_width):
     print("Calling function")
-#     df = pd.DataFrame([[sepal_length],[sepal_width],[petal_length],[petal_width]], 
+    #df = pd.DataFrame([[sepal_length],[sepal_width],[petal_length],[petal_width]], 
     df = pd.DataFrame([[sepal_length,sepal_width,petal_length,petal_width]], 
                       columns=['sepal_length','sepal_width','petal_length','petal_width'])
     print("Predicting")
@@ -30,7 +30,7 @@ def iris(sepal_length, sepal_width, petal_length, petal_width):
 
     # We add '[0]' to the result of the transformed 'res', because 'res' is a list, and we only want 
     # the first element.
-#     print("Res: {0}").format(res)
+    #print("Res: {0}").format(res)
     print(res[0])
     flower_url = "https://raw.githubusercontent.com/featurestoreorg/serverless-ml-course/main/src/01-module/assets/" + res[0] + ".png"
     img = Image.open(requests.get(flower_url, stream=True).raw)
