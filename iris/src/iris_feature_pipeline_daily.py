@@ -58,8 +58,9 @@ def get_random_iris_flower():
 def g():
     import hopsworks
     import pandas as pd
+    import os
 
-    hopsworks_api_key= 'bP6PFOAzbXllM89C.l9gzwKTyxct786c3V1gwIQEvbQfZnSELxp7UM4RdBhw0eTaqkdl1Ld2a4A32UmR9'
+    hopsworks_api_key= os.environ["HOPS_LAB1_IRIS_KEY"]
     project = hopsworks.login(api_key_value = hopsworks_api_key)
     fs = project.get_feature_store()
 
