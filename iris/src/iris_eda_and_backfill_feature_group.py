@@ -6,7 +6,6 @@ import pandas as pd
 import os
 
 hopsworks_iris_api_key = os.environ['HOPSWORKS_IRIS_APY_KEY']
-#hopsworks_iris_api_key = 'bP6PFOAzbXllM89C.l9gzwKTyxct786c3V1gwIQEvbQfZnSELxp7UM4RdBhw0eTaqkdl1Ld2a4A32UmR9'
 project = hopsworks.login(api_key_value = hopsworks_iris_api_key)
 fs = project.get_feature_store()
 
