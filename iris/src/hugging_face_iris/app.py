@@ -43,7 +43,7 @@ demo = gr.Interface(
     description="Experiment with sepal/petal lengths/widths to predict which flower it is.",
     allow_flagging="never",
     inputs=[    
-        gr.Number(label="sepal length (cm)", default='2'),
+        gr.Number(label="sepal length (cm)"),
         gr.Number(label="sepal width (cm)"),
         gr.Number(label="petal length (cm)"),
         gr.Number(label="petal width (cm)"),
