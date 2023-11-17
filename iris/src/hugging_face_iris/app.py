@@ -50,4 +50,4 @@ demo = gr.Interface(
         ],
     outputs=gr.Image(type="pil"))
 
-demo.launch(debug=True)
+demo.launch(debug=True, share=True)
