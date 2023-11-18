@@ -12,3 +12,4 @@ dataframe_image
 modal
 gradio
 hopsworks
+math
