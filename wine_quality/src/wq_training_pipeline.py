@@ -45,7 +45,9 @@ feature_view = fs.get_or_create_feature_view(name="wine_quality",
 # - GB:  Gradient Boosting
 # - RF:  Random Forest
 # You can read training data, randomly split into train/test sets of features (X) and labels (y)        
-X_train, X_test, y_train, y_test = feature_view.train_test_split(0.2)
+X_train_raw, X_test_raw, y_train, y_test = feature_view.train_test_split(0.2)
+X_train = X_train_raw.drop(columns = "key")
+X_test  = X_test_raw.drop( columns = "key")
 
 # Various RandomForest models are tested, in order to select the best parameters. In our project:
 # Best parameters:  max_depth = 13, n_estimators: 139
