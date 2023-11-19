@@ -205,14 +205,21 @@ for col in convert_column:
 
 ################################ DATA INSERTION ################################
 # Insert our WineQuality DataFrame into a FeatureGroup. 
-
 if(HOPS_WORKLOAD):
-    wine_fg = fs.get_or_create_feature_group(
+    wine_fg_pred = fs.get_or_create_feature_group(
         name="wine_quality",
         version=1,
         primary_key=["key"], 
         description="Wine quality dataset")
-    wine_fg.insert(to_upload_df)
+    wine_fg_pred.insert(to_upload_df)
+
+# Insert WineQuality samples before the data binning and removel, that will be used for feature creation
+    wine_fg_pred = fs.get_or_create_feature_group(
+        name="wine_samples",
+        version=1,
+        primary_key=["key"], 
+        description="Wine samples dataset")
+    wine_fg_pred.insert(clean2_df)
 
 print(to_upload_df.head())
 print(to_upload_df.tail())
