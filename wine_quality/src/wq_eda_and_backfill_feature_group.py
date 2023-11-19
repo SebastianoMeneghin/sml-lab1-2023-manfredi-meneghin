@@ -187,6 +187,7 @@ for col in column_div:
             if (div == 0 and cell <= low_quant) or (div == quant_div - 1 and cell > up_quant) or ((cell > low_quant) and (cell <= up_quant)):
                     clean2_df.at[row,col] = div + 1
 
+################################ DATA CONVERSION ###############################
 # Assing number to label Red -> 1 and White -> 2
 for row in range(clean2_df.shape[0]):
     wine_type = clean2_df.at[row, 'type']
