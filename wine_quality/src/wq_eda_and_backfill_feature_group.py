@@ -155,26 +155,65 @@ for name in clean_list:
     to_remove.update(lower_array)
 
 to_remove_list = list(to_remove)
-print(to_remove_list)
 
 # Removing the outliers
 clean2_df = clean1_df.drop(labels=list(to_remove), axis = 0).drop(columns='key').reset_index(drop=True)
 clean2_df = clean2_df.rename_axis("key").reset_index()
 
-clean2_df.info()
-clean2_df.describe()
+print(clean2_df.info())
+print(clean2_df.describe())
 
+################################ DATA BINNING AND REMOVAL ###############################
+quantiles = [0.2, 0.4, 0.6, 0.8]
+quant_div = len(quantiles)
+column_div = ['fixed_acid','volatile_acid', 'citric_acid', 'residual_sugar', 'chlorides', 'free_sd', 'density', 'ph', 'sulphates', 'alcohol']
+print(column_div)
+
+for col in column_div:
+    quant_val = []
+    for div in range(quant_div):
+        quant_val.append(clean2_df[col].quantile(quantiles[div]))
+        
+    for row in range(clean2_df.shape[0]):
+        cell = clean2_df.at[row,col]
+
+        for div in range(quant_div):
+            #print(row, col, div)
+
+            low_quant = quant_val[div]
+            if (div != quant_div - 1):
+                up_quant = quant_val[div + 1]
+            
+            if (div == 0 and cell <= low_quant) or (div == quant_div - 1 and cell > up_quant) or ((cell > low_quant) and (cell <= up_quant)):
+                    clean2_df.at[row,col] = div + 1
+
+# Assing number to label Red -> 1 and White -> 2
+for row in range(clean2_df.shape[0]):
+    wine_type = clean2_df.at[row, 'type']
+    if wine_type == 'red':
+        clean2_df.at[row, 'type'] = 1
+    else:
+        clean2_df.at[row, 'type'] = 2
+
+# Convert columns to integers instead of floats or string
+convert_column = ['type','fixed_acid','volatile_acid', 'citric_acid', 'residual_sugar', 'chlorides', 'free_sd', 'density', 'ph', 'sulphates', 'alcohol']
+to_upload_df = clean2_df.drop(columns = ['total_sd'])
+for col in convert_column:
+    to_upload_df = to_upload_df.astype({col: 'int64'})
 
 ################################ DATA INSERTION ################################
 # Insert our WineQuality DataFrame into a FeatureGroup. 
 
 if(HOPS_WORKLOAD):
     wine_fg = fs.get_or_create_feature_group(
-        name="wine",
+        name="wine_quality",
         version=1,
         primary_key=["key"], 
         description="Wine quality dataset")
-    wine_fg.insert(clean2_df)
+    wine_fg.insert(to_upload_df)
+
+print(to_upload_df.head())
+print(to_upload_df.tail())
 
 
 ################################ DATA VALIDATION ################################
