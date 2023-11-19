@@ -164,7 +164,7 @@ clean2_df = clean2_df.rename_axis("key").reset_index()
 print(clean2_df.info())
 print(clean2_df.describe())
 
-samples_df = clean2_df.describe()
+samples_df = clean2_df.drop(columns = ['type', 'quality'])
 
 ################################ DATA BINNING AND REMOVAL ###############################
 quantiles = [0.2, 0.4, 0.6, 0.8]
