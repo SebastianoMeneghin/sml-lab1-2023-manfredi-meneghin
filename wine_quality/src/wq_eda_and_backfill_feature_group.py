@@ -51,7 +51,6 @@ print(f'\n{wine_df.isnull().sum()}')
 
 
 ########################### DATA VISUALISATION #############################
-
 if (DATA_VISUAL):
     # Distribution are printed, with quartiles
     fig, axes = plt.subplots(6, 2, figsize=(15, 10))
@@ -164,13 +163,15 @@ clean2_df = clean2_df.rename_axis("key").reset_index()
 print(clean2_df.info())
 print(clean2_df.describe())
 
+# Create samples_df, to upload it after in the code in a separated feature group
 samples_df = clean2_df.drop(columns = ['type', 'quality'])
+print(samples_df)
+
 
 ################################ DATA BINNING AND REMOVAL ###############################
 quantiles = [0.2, 0.4, 0.6, 0.8]
 quant_div = len(quantiles)
 column_div = ['fixed_acid','volatile_acid', 'citric_acid', 'residual_sugar', 'chlorides', 'free_sd', 'density', 'ph', 'sulphates', 'alcohol']
-print(column_div)
 
 for col in column_div:
     quant_val = []
@@ -190,6 +191,7 @@ for col in column_div:
             if (div == 0 and cell <= low_quant) or (div == quant_div - 1 and cell > up_quant) or ((cell > low_quant) and (cell <= up_quant)):
                     clean2_df.at[row,col] = div + 1
 
+
 ################################ DATA CONVERSION ###############################
 # Assing number to label Red -> 1 and White -> 2
 for row in range(clean2_df.shape[0]):
@@ -204,6 +206,7 @@ convert_column = ['type','fixed_acid','volatile_acid', 'citric_acid', 'residual_
 to_upload_df = clean2_df.drop(columns = ['total_sd'])
 for col in convert_column:
     to_upload_df = to_upload_df.astype({col: 'int64'})
+
 
 ################################ DATA INSERTION ################################
 # Insert our WineQuality DataFrame into a FeatureGroup. 
@@ -222,6 +225,8 @@ if(HOPS_WORKLOAD):
         primary_key=["key"], 
         description="Wine samples dataset")
     wine_fg_pred.insert(samples_df)
+
+print(samples_df)
 
 print(to_upload_df.head())
 print(to_upload_df.tail())
