@@ -11,7 +11,8 @@ import math
 
 # Part of the code used to disable some parts:
 HOPS_WORKLOAD = True
-DATA_VISUAL = False
+DATA_VISUAL   = False
+VALIDATION    = False
 
 if(HOPS_WORKLOAD):
     # Get hopsworks
@@ -221,31 +222,31 @@ print(to_upload_df.tail())
 # Data validation rules can be defined and validated. Indeed, the following code
 # prevents to write data into the iris dataset when values exceed expected ranges.
 
-from great_expectations.core import ExpectationSuite, ExpectationConfiguration
+# This is not done now, due to some problem with the 
+if (VALIDATION):
+    from great_expectations.core import ExpectationSuite, ExpectationConfiguration
 
-def expect(suite, column, min_val, max_val):
-    suite.add_expectation(
-    ExpectationConfiguration(
-        expectation_type="expect_column_values_to_be_between",
-        kwargs={
-            "column":column, 
-            "min_value":min_val,
-            "max_value":max_val,
-        }
+    def expect(suite, column, min_val, max_val):
+        suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_be_between",
+            kwargs={
+                "column":column, 
+                "min_value":min_val,
+                "max_value":max_val,
+            }
+        )
     )
-)
 
-# Due to some problems with the conversion, the data are not uploaded
-#suite = ExpectationSuite(expectation_suite_name="wine_qualities")
-#expect(suite, "fixed_acid", clean2_df['fixed_acid'].min, clean2_df['fixed_acid'].max)
-#expect(suite, "volatile_acid", clean2_df['volatile_acid'].min, clean2_df['volatile_acid'].max)
-#expect(suite, "citric_acid ", clean2_df['citric_acid'].min, clean2_df['citric_acid'].max)
-#expect(suite, "residual_sugar", clean2_df['residual_sugar'].min, clean2_df['residual_sugar'].max)
-#expect(suite, "chlorides", clean2_df['chlorides'].min, clean2_df['chlorides'].max)
-#expect(suite, "free_sd", clean2_df['free_sd'].min, clean2_df['free_sd'].max)
-#expect(suite, "total_sd", clean2_df['total_sd'].min, clean2_df['total_sd'].max)
-#expect(suite, "density", clean2_df['density'].min, clean2_df['density'].max)
-#expect(suite, "ph", clean2_df['ph'].min, clean2_df['ph'].max)
-#expect(suite, "sulphates", clean2_df['sulphates'].min, clean2_df['sulphates'].max)
-#expect(suite, "alcohol", clean2_df['alcohol'].min, clean2_df['alcohol'].max)
-#wine_fg.save_expectation_suite(expectation_suite=suite, validation_ingestion_policy="STRICT")
+    suite = ExpectationSuite(expectation_suite_name="wine_qualities")
+    expect(suite, "fixed_acid", to_upload_df['fixed_acid'].min, to_upload_df['fixed_acid'].max)
+    expect(suite, "volatile_acid", to_upload_df['volatile_acid'].min, to_upload_df['volatile_acid'].max)
+    expect(suite, "citric_acid ", to_upload_df['citric_acid'].min, to_upload_df['citric_acid'].max)
+    expect(suite, "residual_sugar", to_upload_df['residual_sugar'].min, to_upload_df['residual_sugar'].max)
+    expect(suite, "chlorides", to_upload_df['chlorides'].min, to_upload_df['chlorides'].max)
+    expect(suite, "free_sd", to_upload_df['free_sd'].min, to_upload_df['free_sd'].max)
+    expect(suite, "density", to_upload_df['density'].min, to_upload_df['density'].max)
+    expect(suite, "ph", to_upload_df['ph'].min, to_upload_df['ph'].max)
+    expect(suite, "sulphates", to_upload_df['sulphates'].min, to_upload_df['sulphates'].max)
+    expect(suite, "alcohol", to_upload_df['alcohol'].min, to_upload_df['alcohol'].max)
+    wine_fg.save_expectation_suite(expectation_suite=suite, validation_ingestion_policy="STRICT")
