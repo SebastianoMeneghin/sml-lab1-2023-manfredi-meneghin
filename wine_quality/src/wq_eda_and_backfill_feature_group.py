@@ -164,6 +164,8 @@ clean2_df = clean2_df.rename_axis("key").reset_index()
 print(clean2_df.info())
 print(clean2_df.describe())
 
+samples_df = clean2_df.describe()
+
 ################################ DATA BINNING AND REMOVAL ###############################
 quantiles = [0.2, 0.4, 0.6, 0.8]
 quant_div = len(quantiles)
@@ -219,7 +221,7 @@ if(HOPS_WORKLOAD):
         version=1,
         primary_key=["key"], 
         description="Wine samples dataset")
-    wine_fg_pred.insert(clean2_df)
+    wine_fg_pred.insert(samples_df)
 
 print(to_upload_df.head())
 print(to_upload_df.tail())

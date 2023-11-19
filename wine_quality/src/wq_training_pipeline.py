@@ -30,7 +30,6 @@ project = hopsworks.login(api_key_value = hopsworks_iris_api_key)
 fs = project.get_feature_store()
 
 # Create the feature view to access the dataset on hopsworks
-# Here, the variable "Total Sulfuric Dioxide" is removed, due to what found during the EDA
 wine_fg = fs.get_feature_group(name="wine_quality", version=1)
 query = wine_fg.select_all()
 feature_view = fs.get_or_create_feature_view(name="wine_quality",
