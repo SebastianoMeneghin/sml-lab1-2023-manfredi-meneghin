@@ -31,7 +31,7 @@ fs = project.get_feature_store()
 
 # Create the feature view to access the dataset on hopsworks
 wine_fg = fs.get_feature_group(name="wine_quality", version=1)
-query = wine_fg.select_all()
+query = wine_fg.select_except('key')
 feature_view = fs.get_or_create_feature_view(name="wine_quality",
                                   version=1,
                                   description="Read from Wine Quality Dataset",
@@ -159,6 +159,7 @@ wine_model_pred = mr.python.create_model(
     name="wine_model_pred", 
     metrics={"accuracy" : metrics_GB['accuracy']},
     model_schema=model_schema,
+    version=1,
     description="Wine Quality Predictor"
 )
 
@@ -166,6 +167,7 @@ wine_model_feature_creator = mr.python.create_model(
     name="wine_model_feature_creator", 
     metrics={"accuracy" : metrics_RF['accuracy']},
     model_schema=model_schema,
+    version=1,
     description="Wine Quality feature creator"
 )
 
