@@ -4,10 +4,10 @@ import modal
 LOCAL=False
 
 if LOCAL == False:
-   stub = modal.Stub("iris_daily")
+   stub = modal.Stub("iris_daily_creation")
    image = modal.Image.debian_slim().pip_install(["hopsworks"]) 
 
-   @stub.function(cpu=1.0, image=image, schedule=modal.Period(hours=1), secret=modal.Secret.from_name("hopsworks_iris_api"))
+   @stub.function(cpu=1.0, image=image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("hopsworks_iris_api"))
    def f():
        g()
 

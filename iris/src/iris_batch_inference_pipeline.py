@@ -7,7 +7,7 @@ if LOCAL == False:
    stub = modal.Stub("iris_batch")
    hopsworks_image = modal.Image.debian_slim().pip_install(["hopsworks","joblib","seaborn","scikit-learn==1.1.1","dataframe-image","Pillow"])
    
-   @stub.function(image=hopsworks_image, schedule=modal.Period(hours=1), secret=modal.Secret.from_name("hopsworks_iris_api"))
+   @stub.function(image=hopsworks_image, schedule=modal.Period(days=1), secret=modal.Secret.from_name("hopsworks_iris_api"))
    def f():
        g()
 
