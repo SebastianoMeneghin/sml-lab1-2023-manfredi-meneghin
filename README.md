@@ -11,8 +11,8 @@ After the **environments is set**, via pip giving *requirements.txt* as input or
 
 
 
-
-### Software used
+----------------------------------------------
+#### Software used
 
 [**Visual Studio Code**](https://code.visualstudio.com/) - main IDE
 
