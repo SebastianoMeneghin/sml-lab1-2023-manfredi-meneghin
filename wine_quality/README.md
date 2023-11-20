@@ -61,8 +61,19 @@ The *normalize_wine* function prepares the wine features for machine learning pr
 The most important function is *get_random_wine*: it **integrates these functionalities**, generating a random wine feature, normalizing it, predicting labels, and displaying the resulting row in form of a DataFrame. This is then **saved into the main feature group.**
 
 ### 🔎 wq_batch_inference_pipeline.py
+As in the previous section, the variable **LOCAL determines whether the code runs locally or within the Modal environment.** If not running locally, the modal is employed to configure the "batch_wine_daily" function, specifying dependencies and daily scheduling.
+
+The *g()* function connects to Hopsworks, retrieves a pre-trained model from the model registry, and utilizes it to **predict wine quality** based on the latest features uploaded "wine_quality" feature view, created daily by *wq_feature_pipeline_daily*.
+
+Wine quality images are downloaded from an online repository, saved locally and uploaded to the Hopsworks dataset. Additionally, a **list of the recent predictions** is saved as an image, **and** from them **a *confusion_matrix* is created**. Both are uploaded to Hopsworks.
+
+Those are gonna be **used by the Gradio's User Interfaces** to *monitor the prediction performance* of the model *and the history of the predictions*.
 
 ### 🧹(extra) model_clean_training_dataset_daily.py
+To **overcome limitation of Hopswork free version**, this code is run on a Modal remote machine. Every day, **it resets each *training_set* created** for a specific *feature_view* for each feature views of the two tasks.
+
+In this way, the **limit of 100 training_set** that can be created all together is then **never reached**.
+
 ------------------------------------------------
 ### Software used
 
