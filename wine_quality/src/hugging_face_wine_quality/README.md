@@ -1,8 +1,8 @@
 ---
-title: Iris
-emoji: 🪻
-colorFrom: purple
-colorTo: green
+title: Wine Quality
+emoji: 🍷
+colorFrom: green
+colorTo: purple
 sdk: gradio
 sdk_version: 4.3.0
 app_file: app.py
