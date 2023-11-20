@@ -96,8 +96,8 @@ def g():
 
     # Take the recent history and create from it a graph, that than is saved on Hopsworks
     df_recent = history_df.tail(4)
-    dfi.export(df_recent, './df_recent.png', table_conversion = 'matplotlib')
-    dataset_api.upload("./df_recent.png", "Resources/images", overwrite=True)
+    dfi.export(df_recent, './df_recent_wine.png', table_conversion = 'matplotlib')
+    dataset_api.upload("./df_recent_wine.png", "Resources/images", overwrite=True)
     
     # Take the column of predictions and labels
     predictions = history_df[['prediction']]
@@ -125,8 +125,8 @@ def g():
     
         cm = sns.heatmap(df_cm, annot=True)
         fig = cm.get_figure()
-        fig.savefig("./confusion_matrix.png")
-        dataset_api.upload("./confusion_matrix.png", "Resources/images", overwrite=True)
+        fig.savefig("./confusion_matrix_wine.png")
+        dataset_api.upload("./confusion_matrix_wine.png", "Resources/images", overwrite=True)
 
     else:
         print("You need at least two wine quality type predictions to create the confusion matrix.")
