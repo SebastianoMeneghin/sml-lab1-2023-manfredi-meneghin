@@ -65,7 +65,7 @@ def g():
 
     quality_label = df.iloc[-offset]["quality"]
     quality_label_url = "https://raw.githubusercontent.com/SebastianoMeneghin/fotografie_iris/main/" + str(quality_label) + ".png"
-    print("Flower actual: " + str(quality_label))
+    print("Actual wine quality: " + str(quality_label))
     img = Image.open(requests.get(quality_label_url, stream=True).raw)        
     img.save("./actual_wine_quality.png")
     dataset_api.upload("./actual_wine_quality.png", "Resources/images", overwrite=True)
