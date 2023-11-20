@@ -1,6 +1,6 @@
 # Scalable Machine Learning and Deep Learning, Lab1, 2023
 
-### About
+## About
 In **this repository** you can find:
 - 🪻[**iris:**](https://github.com/SebastianoMeneghin/sml-lab1-2023-manfredi-meneghin/tree/main/iris) Task 1 of the Lab1
 - 🍷 [**wine_quality:**](https://github.com/SebastianoMeneghin/sml-lab1-2023-manfredi-meneghin/tree/main/wine_quality) Task 2 of the Lab1
@@ -12,7 +12,7 @@ After the **environments is set**, via pip giving *requirements.txt* as input or
 
 
 ----------------------------------------------
-#### Software used
+### Software used
 
 [**Visual Studio Code**](https://code.visualstudio.com/) - main IDE
 
