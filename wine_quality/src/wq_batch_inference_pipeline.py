@@ -6,7 +6,7 @@ LOCAL=False
 
 if LOCAL == False:
    stub = modal.Stub("batch_wine_10mins")
-   image = modal.Image.debian_slim().pip_install(["hopsworks", "joblib", "seaborn","scikit-learn==1.1.1","dataframe-image","Pillow"]) 
+   image = modal.Image.debian_slim().pip_install(["hopsworks", "joblib", "seaborn","scikit-learn==1.1.1","dataframe-image","Pillow", "numpy"]) 
 
    @stub.function(cpu=1.0, image=image, schedule=modal.Period(minutes=10), secret=modal.Secret.from_name("hopsworks_iris_api"))
    def f():
@@ -26,6 +26,7 @@ def g():
     import seaborn as sns
     import requests
     import io
+    import numpy as np
 
     # Login to hopsworks and get access to the file system
     hopsworks_api_key= os.environ["HOPS_LAB1_IRIS_KEY"]
@@ -46,7 +47,7 @@ def g():
 
     # Get the prediction of the last wine inserted
     offset = 1
-    wine = y_pred[y_pred.size-offset]
+    wine = y_pred[y_pred.size - offest]
     print('This is your wine prediction:', wine)
 
     # Get the image of the wine quality online, from an online GitHub repo, through HTTP method
@@ -118,8 +119,8 @@ def g():
         true_qualities = []
         pred_qualities = []
         for quality in qualities_list:
-            true_qualities.append('True Quality: ' + quality)
-            pred_qualities.append('Pred Quality: ' + quality)
+            true_qualities.append('True Quality: ' + str(quality))
+            pred_qualities.append('Pred Quality: ' + str(quality))
 
         df_cm = pd.DataFrame(results, true_qualities, pred_qualities)
     
