@@ -5,10 +5,10 @@ import joblib
 LOCAL=False
 
 if LOCAL == False:
-   stub = modal.Stub("wine_5mins")
+   stub = modal.Stub("wine_10mins")
    image = modal.Image.debian_slim().pip_install(["hopsworks", "joblib", "seaborn","scikit-learn==1.1.1","dataframe-image","Pillow"]) 
 
-   @stub.function(cpu=1.0, image=image, schedule=modal.Period(minutes=5), secret=modal.Secret.from_name("hopsworks_iris_api"))
+   @stub.function(cpu=1.0, image=image, schedule=modal.Period(minutes=10), secret=modal.Secret.from_name("hopsworks_iris_api"))
    def f():
        g()
 
