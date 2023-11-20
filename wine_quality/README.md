@@ -21,7 +21,7 @@ The **main steps** of the project are:
 
 
 ## Modules description
-### wq_eda_and_backfill_feature_group.py/ipynb
+### 🍷 wq_eda_and_backfill_feature_group.py/ipynb
 Here's were the **data are taken from the online repository** of Wine Quality Dataset. The **data are visualized** using a mix of *graphical and analytical tools*, such as boxplot, violinplot, correlation matrix, but also quantiles, mean, max and min. (Graphical tools can be easily run on the [provided notebook](https://github.com/SebastianoMeneghin/sml-lab1-2023-manfredi-meneghin/blob/main/wine_quality/src/wq_eda_and_backfill_feature_group.ipynb), that contains the same code of the python file script).
 
 The **analysis show** an high correlation between free sulfur dioxide and total free dioxide, so only one of the two is saved, to further train the ML models.
@@ -32,18 +32,18 @@ Once normalized, **data are binned**, string attributes such as 'type' are conve
 
 Two **different feature groups are stored** on Hopsworks, representing the data in two different stages of the pre-processing step. The second feature group is indeed created to keep track of useful attributes' statistics as mean, standard deviation, min and max, that will be used to create the data.
 
-### wq_training_pipeline.py
+### 🏋🏻‍♀️ wq_training_pipeline.py
 At the beginning of the code, some boolean variables (RF_TEST, GB_TEST, KNN_TEST) are configured, to **determine whether to evaluate specific machine learning models**. By setting them true, the code will perform also the model evualation. Following this, a feature view for the "wine_quality" dataset is then established, to access the data for training and testing
 
 The core f this part is about training and testing machine learning models. **KNearestNeighbors (KNN), Gradient Boosting (GB) and RandomForest (RF) models are trained and tested**, but due to the low performance, KNN is not selected as prediction model. GB and RF are selected models and then trained with their best parameters on the dataset, and their performance metrics are shown. **GB is used as the prediction model** for the new features, **while RF is used** to determine the value of the 'quality' **for the new feature daily created**.
 
 Essential components, including the confusion matrix image and the trained GB and RF models, are saved in designated directories. Furthermore, input and output schemas are defined for the models and they are **registered in the Hopsworks Model Registry**.
 
-### wq_feature_pipeline_daily.py
+### 🧪 wq_feature_pipeline_daily.py
 
-### wq_batch_inference_pipeline.py
+### 🔎 wq_batch_inference_pipeline.py
 
-### (extra) model_clean_training_dataset_daily.py
+### 🧹 (extra) model_clean_training_dataset_daily.py
 ------------------------------------------------
 ### Software used
 
