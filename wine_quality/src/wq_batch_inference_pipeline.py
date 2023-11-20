@@ -47,7 +47,7 @@ def g():
 
     # Get the prediction of the last wine inserted
     offset = 1
-    wine = y_pred[y_pred.size - offest]
+    wine = y_pred[y_pred.size - offset]
     print('This is your wine prediction:', wine)
 
     # Get the image of the wine quality online, from an online GitHub repo, through HTTP method
