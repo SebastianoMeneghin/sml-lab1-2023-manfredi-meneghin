@@ -113,7 +113,7 @@ def create_random_qualities(stats):
         c = stats[var]['mean']
         d = stats[var]['std'] 
 
-        value = abs(c + d * random.uniform(-2.1,2.1) + ((a-b)/c) * random.uniform(-0.3,0.3))
+        value = abs(c + d * random.uniform(-4.1,5.1) + ((a-b)/c) * random.uniform(-0.5,0.7))
         values[var] = value
 
     return values
