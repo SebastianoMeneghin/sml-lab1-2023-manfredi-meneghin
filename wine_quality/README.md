@@ -45,7 +45,7 @@ Once normalized, **data are binned**, string attributes such as 'type' are conve
 Two **different feature groups are stored** on Hopsworks, representing the data in two different stages of the pre-processing step. The second feature group is indeed created to keep track of useful attributes' statistics as mean, standard deviation, min and max, that will be used to create the data.
 
 ### 🏋🏻‍♀️ wq_training_pipeline.py
-At the beginning of the code, some boolean variables (RF_TEST, GB_TEST, KNN_TEST) are configured, to **determine whether to evaluate specific machine learning models**. By setting them true, the code will perform also the model evualation. Following this, a feature view for the "wine_quality" dataset is then established, to access the data for training and testing
+At the beginning of the code, some boolean variables (RF_TEST, GB_TEST, KNN_TEST) are configured, to **determine whether to evaluate specific machine learning models**. By setting them true, the code will perform also the model evualation. Following this, a feature view for the "wine_quality" dataset is then established, to access the data for training and testing.
 
 The core f this part is about training and testing machine learning models. **KNearestNeighbors (KNN), Gradient Boosting (GB) and RandomForest (RF) models are trained and tested**, but due to the low performance, KNN is not selected as prediction model. GB and RF are selected models and then trained with their best parameters on the dataset, and their performance metrics are shown. **GB is used as the prediction model** for the new features, **while RF is used** to determine the value of the 'quality' **for the new feature daily created**.
 
